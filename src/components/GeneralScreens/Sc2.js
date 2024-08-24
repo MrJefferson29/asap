@@ -9,82 +9,48 @@ export default function Sc2() {
   return (
     <Styles>
       <Container>
-        
-        <Row style={{ marginTop: "50px" }}>
+        <Row className="mt-5">
           <Col md="4">
-            <h2 style={{ fontFamily: "Gaqire" }}>Customer-Centric Approach</h2>
-            <img
-              src={g3}
-              style={{ width: "100%", height: "auto", borderRadius: "10px" }}
-            />
-            <p
-              style={{
-                fontSize: "1.4rem",
-                fontWeight: "700",
-                marginTop: "30px",
-              }}
-            >
+            <SectionTitle>Customer-Centric Approach</SectionTitle>
+            <StyledImage src={g3} alt="Customer-Centric Approach" />
+            <SectionText>
               Your satisfaction is our priority. Our dedicated support team is
               here 24/7 to assist you with any inquiries, ensuring you get the
               most out of our tracking solutions.
-            </p>
+            </SectionText>
           </Col>
 
           <Col md="4">
-            <h2 style={{ fontFamily: "Gaqire" }}>Innovation for Tomorrow</h2>
-            <img
-              src={g5}
-              style={{ width: "100%", height: "auto", borderRadius: "10px" }}
-            />
-            <p
-              style={{
-                fontSize: "1.4rem",
-                fontWeight: "700",
-                marginTop: "30px",
-              }}
-            >
+            <SectionTitle>Innovation for Tomorrow</SectionTitle>
+            <StyledImage src={g5} alt="Innovation for Tomorrow" />
+            <SectionText>
               Embrace the future with Vishis. We're committed to staying ahead
               of the curve, continuously innovating to bring you the latest
               advancements in tracking technology.
-            </p>
+            </SectionText>
           </Col>
 
           <Col md="4">
-            <h2 style={{ fontFamily: "Gaqire" }}>Global Reach, Local Touch</h2>
-            <img
-              src={g4}
-              style={{ width: "75%", height: "auto", borderRadius: "10px" }}
-            />
-            <p
-              style={{
-                fontSize: "1.4rem",
-                fontWeight: "700",
-                marginTop: "30px",
-              }}
-            >
+            <SectionTitle>Global Reach, Local Touch</SectionTitle>
+            <StyledImage src={g4} alt="Global Reach, Local Touch" small />
+            <SectionText>
               With a global reach and a local touch, we provide reliable
               tracking solutions tailored to your specific region or industry
               requirements.
-            </p>
+            </SectionText>
           </Col>
         </Row>
-        <Row style={{ padding: "50px" }}>
-          <center>
-            <h2 style={{ fontFamily: "Ginger" }}>Join Us on Your Journey</h2>
-            <Col
-              md="6"
-              style={{
-                fontSize: "1.4rem",
-                fontWeight: "600",
-                marginTop: "30px",
-              }}
-            >
+
+        <Row className="py-5 text-center">
+          <Col md={{ span: 8, offset: 2 }}>
+            <JourneyTitle>Join Us on Your Journey</JourneyTitle>
+            <SectionText>
               Ready to embark on a journey of unparalleled tracking and
               security? Explore our range of tracking solutions and discover the
               power of being in control. Your story is unique; let us help you
               tell it with precision, security, and confidence.
-            </Col>
-          </center>
+            </SectionText>
+          </Col>
         </Row>
       </Container>
     </Styles>
@@ -93,4 +59,33 @@ export default function Sc2() {
 
 const Styles = styled.div`
   margin-top: 15vh;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+`;
+
+const SectionTitle = styled.h2`
+  font-family: "Gaqire", serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+`;
+
+const StyledImage = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: ${(props) => (props.small ? "20px" : "0")};
+`;
+
+const SectionText = styled.p`
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-top: 20px;
+`;
+
+const JourneyTitle = styled.h2`
+  font-family: "Ginger", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 30px;
 `;

@@ -1,43 +1,21 @@
 import React from "react";
-import { ReactDOM } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import Sc2 from "./Sc2";
-
 import i2 from "../../Assets/m2.jpeg";
 import g6 from "../../Assets/m1.jpeg";
 import { Link } from "react-router-dom";
 
 export default function About() {
   return (
-    <Styels>
+    <Styles>
       <Container>
-        <Row>
-          <Col md="6">
-            <img
-              src={g6}
-              className=""
-              style={{ width: "100%", padding: "10px", borderRadius: "1px" }}
-            />
+        <Row className="about-section">
+          <Col md="6" className="image-col">
+            <img src={g6} alt="Vishis Vision" className="about-image" />
           </Col>
-          <Col
-            md="6"
-            className=""
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <p
-              style={{
-                padding: "20px",
-                fontSize: "1.6rem",
-                fontWeight: "500",
-                fontFamily: "Gaqire",
-              }}
-            >
+          <Col md="6" className="text-col">
+            <p className="about-text">
               Embarking on this journey with a vision to redefine delivery
               tracking, Vishis was born out of the desire to simplify and
               enhance the way we monitor and receive our packages. Established
@@ -48,25 +26,9 @@ export default function About() {
           </Col>
         </Row>
 
-        <Row>
-          <Col
-            md="6"
-            className=""
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <p
-              style={{
-                padding: "20px",
-                fontSize: "1.6rem",
-                fontWeight: "500",
-                fontFamily: "Gaqire",
-              }}
-            >
+        <Row className="about-section">
+          <Col md="6" className="text-col">
+            <p className="about-text">
               At Vishis, we are not just a tracking platform; we are your
               partners in the delivery experience. Our mission is to empower you
               with a tool that doesn’t just show you the route your package
@@ -74,75 +36,119 @@ export default function About() {
               you smile when your parcel arrives – timely and intact.
             </p>
           </Col>
-          <Col>
-            <img
-              src={i2}
-              className=""
-              style={{ width: "100%", padding: "10px", borderRadius: "1px" }}
-            />
+          <Col md="6" className="image-col">
+            <img src={i2} alt="Vishis Mission" className="about-image" />
           </Col>
         </Row>
       </Container>
-      <Row
-        className="5150"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "80vh",
-          backgroundColor: "black",
-        }}
-      >
-        <div
-          style={{
-            width: "70vh",
-            fontSize: "1.4rem",
-            color: "aliceblue",
-            fontWeight: "800",
-            fontFamily: "Lobster",
-          }}
-        >
-          <p>
-            Become a part of the Vishis community – a place where
-            tracking becomes an experience, and deliveries become celebrations.
-            Whether you're a business optimizing your logistics or an individual
-            eagerly awaiting a special package, we invite you to join us on this
-            exciting journey. Thank you for choosing Vishis – where
-            every delivery is a story waiting to be told!
-          </p>
 
-          <Link to="adopt-shelter">
-            <button className="bttn">Visit Shelter</button>
+      <Row className="cta-section">
+        <div className="cta-content">
+          <p>
+            Become a part of the Vishis community – a place where tracking
+            becomes an experience, and deliveries become celebrations. Whether
+            you're a business optimizing your logistics or an individual eagerly
+            awaiting a special package, we invite you to join us on this
+            exciting journey. Thank you for choosing Vishis – where every
+            delivery is a story waiting to be told!
+          </p>
+          <Link to="/adopt-shelter">
+            <button className="cta-button">Visit Shelter</button>
           </Link>
         </div>
       </Row>
-      {/* <Container> */}
-      {/* </Container> */}
+
       <Sc2 />
-    </Styels>
+    </Styles>
   );
 }
 
-const Styels = styled.div`
+const Styles = styled.div`
   overflow-x: hidden;
-  .bttn {
+  padding: 20px 0;
+
+  .about-section {
+    margin-bottom: 40px;
+  }
+
+  .image-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-image {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-text {
+    padding: 20px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-family: "Gaqire", sans-serif;
+    line-height: 1.6;
+  }
+
+  .cta-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 60vh;
+    background-color: #000;
+    color: #f0f0f0;
+    padding: 40px 20px;
+  }
+
+  .cta-content {
+    max-width: 700px;
+  }
+
+  .cta-button {
     width: 200px;
-    height: 70px;
-    margin-top: 30px;
-    border-radius: 3px;
+    height: 50px;
+    margin-top: 20px;
+    border-radius: 5px;
     border: none;
     background: burlywood;
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 600;
     color: aliceblue;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
     &:hover {
-      opacity: 0.5;
+      background: #d3a17e;
+      transform: scale(1.05);
     }
   }
+
   @media only screen and (max-width: 767px) {
-    .imag {
-      height: 70vh;
+    .about-text {
+      font-size: 1.2rem;
+    }
+
+    .about-image {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .cta-section {
+      padding: 20px 10px;
+    }
+
+    .cta-button {
+      width: 180px;
+      height: 50px;
     }
   }
 `;

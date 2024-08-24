@@ -1,16 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SearchForm from "./SearchForm";
 import "../../Css/Header.css";
-import { RiPencilFill } from "react-icons/ri";
-import { FaUserEdit } from "react-icons/fa";
-import { BiLogOut } from "react-icons/bi";
-import { BsBookmarks } from "react-icons/bs";
-import SkeletonElement from "../Skeletons/SkeletonElement";
-import { AuthContext } from "../../Context/AuthContext";
-import { Nav, Navbar, Container } from "react-bootstrap";
+import { FaUserEdit, FaBars } from "react-icons/fa";
+import { Nav, Navbar, Container, NavDropdown } from "react-bootstrap";
 import styled from "styled-components";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Header = () => {
   const bool = localStorage.getItem("authToken") ? true : false;
@@ -26,95 +20,53 @@ const Header = () => {
     }, 1600);
   }, [bool]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    navigate("/");
-  };
-
   return (
     <Styles>
       <Navbar collapseOnSelect expand="lg" className="navy" sticky="top">
         <Container sticky="top">
           <Navbar.Brand href="/">
-            <div style={{fontFamily: 'Ginger', color: 'burlywood', fontSize: '1.9rem', fontWeight: '700'}}>
-            <font>V</font>ishis..
+            <div className="brand">
+              <span>V</span>ishis..
             </div>
           </Navbar.Brand>
-          <Navbar.Toggle
-            aria-controls="responsive-navbar-nav"
-            style={{ position: "relative", background: "aliceblue" }}
-          />
-          <Navbar.Collapse
-            id="responsive-navbar-nav"
-            sticky="top"
-            className="justify-content-end"
-          >
+          <Navbar.Toggle aria-controls="responsive-navbar-nav">
+            <FaBars style={{ color: "aliceblue" }} />
+          </Navbar.Toggle>
+          <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
             <Nav className="justify-content-end">
-              <Link
-                className="link"
-                to="/"
-                style={{ color: "aliceblue" }}
-              >
+              <Nav.Link as={Link} to="/" className="nav-link">
                 HOME
-              </Link>
-              <Link
-                className="link"
-                to="/tracking"
-                style={{ color: "aliceblue" }}
-              >
+              </Nav.Link>
+              <Nav.Link as={Link} to="/tracking" className="nav-link">
                 TRACK
-              </Link>
-              {auth ? (
-                <Link
-                  className="link"
-                  to="/create-post"
-                  style={{ color: "aliceblue" }}
-                >
+              </Nav.Link>
+              {auth && (
+                <Nav.Link as={Link} to="/create-post" className="nav-link">
                   NEW PACKAGE
-                </Link>
-              ) : (
-                <></>
+                </Nav.Link>
               )}
-              <Link
-                className="link"
-                to="/about"
-                style={{ color: "aliceblue" }}
-              >
+              <Nav.Link as={Link} to="/about" className="nav-link">
                 ABOUT
-              </Link>
-              <Link
-                className="link"
-                to="/meet-the-team"
-                style={{ color: "aliceblue" }}
-              >
+              </Nav.Link>
+              <Nav.Link as={Link} to="/meet-the-team" className="nav-link">
                 TEAM
-              </Link>
-
-              {auth ? (
-                <>
-                  <div className="link">
-                    <i class="bi bi-box-seam"></i>
-                    <div className="readList-link" style={{ color: "black" }}>
-                      .
-                    </div>
-                  </div>
-                  <div className="link">
-                    
-                    <div className="sub-profile-wrap  ">
-                      <Link className="profile-link" to="/profile">
-                        {" "}
-                        <FaUserEdit /> Profile{" "}
-                      </Link>
-
-                      <button className="logout-btn" onClick={handleLogout}>
-                        {" "}
-                        <BiLogOut /> Logout
-                      </button>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <></>
+              </Nav.Link>
+              {auth && (
+                <NavDropdown title="Profile" id="collasible-nav-dropdown" className="nav-link-dropdown">
+                  <NavDropdown.Item as={Link} to="/profile">
+                    <FaUserEdit /> Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item
+                    onClick={() => {
+                      localStorage.removeItem("authToken");
+                      setAuth(false);
+                      navigate("/");
+                    }}
+                  >
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
               )}
             </Nav>
           </Navbar.Collapse>
@@ -127,28 +79,82 @@ const Header = () => {
 export default Header;
 
 const Styles = styled.div`
-  // height: 200px;
-  .IconWrapper {
-    font-size: 56px;
-    color: burlywood;
-    padding-right: 20px;
-    transition: transform 0.2s ease;
+  .navy {
+    background-color: #0a1d37;
+    padding: 0.5rem 1rem;
+  }
 
-    &:hover {
-      transform: scale(1.2);
+  .brand {
+    font-family: 'Ginger', sans-serif;
+    color: burlywood;
+    font-size: 2rem;
+    font-weight: 700;
+
+    span {
+      font-size: 2.4rem;
+      color: lightcoral;
     }
   }
-  .link {
-    font-size: 1.4rem;
-    text-decoration: none;
-    font-weight: 900;
-    color: aliceblue;
-    margin-left: 45px;
-    font-family: 'Gaqire'
+
+  .nav-link {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: aliceblue !important;
+    margin-left: 25px;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: lightcoral !important;
+    }
   }
-  .eor {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+  .nav-link-dropdown {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: aliceblue !important;
+    margin-left: 25px;
+
+    .dropdown-toggle::after {
+      color: aliceblue;
+    }
+
+    .dropdown-menu {
+      background-color: #0a1d37;
+      border: none;
+
+      .dropdown-item {
+        color: aliceblue;
+
+        &:hover {
+          background-color: lightcoral;
+          color: white;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav-link {
+      margin-left: 0;
+      padding: 0.5rem 0;
+    }
+
+    .nav-link-dropdown {
+      margin-left: 0;
+      padding: 0.5rem 0;
+    }
+
+    .navbar-collapse {
+      background-color: #0a1d37;
+      padding: 1rem;
+    }
+
+    .brand {
+      font-size: 1.6rem;
+
+      span {
+        font-size: 2rem;
+      }
+    }
   }
 `;

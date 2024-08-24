@@ -1,136 +1,117 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import Loader from "../GeneralScreens/Loader";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { FiEdit, FiArrowLeft } from "react-icons/fi";
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTruck } from "@fortawesome/free-solid-svg-icons";
-import "@fortawesome/fontawesome-free/css/all.css";
-import { Col, Row, Container } from "react-bootstrap";
-import styled from "styled-components";
 
-const Story = ({ story }) => {
+const TrackingStatement = ({ story }) => {
   return (
     <Styles>
-      <Container style={{ backgroundColor: 'rgb(217, 219, 220)'}}>
-        <Container>
-        <Row >
+      <Container className="tracking-container">
+        <Row className="tracking-header">
           <Col md="8">
-            <p style={{ fontWeight: "700", fontSize: "1.3rem" }}>
-              Tracking ID:{" "}
-              <font
-                style={{
-                  fontFamily: "Gaqire",
-                  fontSize: "1.5rem",
-                  letterSpacing: "2px",
-                  fontWeight: "bolder",
-                }}
-              >
-                {story.title}
-              </font>
+            <p className="tracking-id">
+              Tracking ID: <span className="tracking-id-value">{story.title}</span>
             </p>
           </Col>
           <Col md="4">
-            <p style={{ fontWeight: "600", fontSize: "1.3rem" }}>
-              Package Status:{" "}
-              <font
-                style={{
-                  fontFamily: "Gaqire",
-                  fontSize: "1.5rem",
-                  letterSpacing: "2px",
-                  fontWeight: "bolder",
-                }}
-              >
-                {story.content}
-              </font>
+            <p className="package-status">
+              Package Status: <span className="package-status-value">{story.content}</span>
             </p>
           </Col>
-          <Row>
-            <p style={{ fontSize: "1.3rem", fontWeight: "700" }}>
-              To be received by {story.receiver}, {story.insurrance}
-            </p>
-            <p style={{ fontSize: "1.3rem", fontWeight: "700" }}>
-              Began transit on{" "}
-              <font
-                style={{
-                  fontSize: "1.3rem",
-                  letterSpacing: "2px",
-                  fontWeight: "700",
-                }}
-              >
-                {story.depart}
-              </font>{" "}
-              and should be expected in{" "}
-              <font
-                style={{
-                  fontSize: "1.3rem",
-                  letterSpacing: "2px",
-                  fontWeight: "700",
-                }}
-              >
-                {story.expect}
-              </font>
-            </p>
-            <h3 className="girl">Package Weight and Dimensions.</h3>
-            <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-              Weight:{" "}
-              <font style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                {story.weight}
-              </font>
-            </p>
-            <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-              Dimensions: Undefined
-            </p>
-            <h2 className="girl">Delivery Notes:</h2>
-            <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-              Please ensure someone is available to receive the package. If you
-              have specific delivery preferences or instructions, contact our
-              customer service.
-            </p>
-            <h2 className="girl">Proof of Delivery:</h2>
-            <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-              Upon delivery, the package will require a signature from the
-              recipient. The proof of delivery with the recipient's name and
-              signature will be available on our tracking portal.
-            </p>
-            <h2 className="girl">Exception Notifications</h2>
-            <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-              In case of any delivery issues or exceptions, you will receive
-              timely notifications. For further assistance, please contact our
-              customer service.
-            </p>
-            <h2 className="girl">Insurrance Informtion</h2>
-            <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-              Your shipment fee is required on freight transit due insurrance. Conditions
-              apply. For details, please refer to our insurance policy.
-            </p>
-            <h2 className="girl">Weather Conditions:</h2>
-            <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-              Please note that weather conditions may impact delivery schedules.
-              We monitor weather updates to minimize any disruptions.
-            </p>
-            <h2 className="girl">Contact Information</h2>
-            <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-              For assistance or inquiries, our customer support team can be
-              reached at vishislogistics1968@gmail.com.
-            </p>
-            <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-              Thank you for choosing Vishis Logistics. We appreciate your trust
-              and look forward to delivering your package with care and
-              efficiency. For real-time updates and additional information,
-              visit our tracking portal at www.vishislogistics.com/tracking.
-            </p>
-          </Row>
         </Row>
-        </Container>
+        <Row className="tracking-details">
+          <p className="receiver-info">
+            To be received by {story.receiver}, {story.insurrance}
+          </p>
+          <p className="transit-info">
+            Began transit on <span className="transit-date">{story.depart}</span> and should be expected in <span className="expected-date">{story.expect}</span>
+          </p>
+          <Section title="Package Weight and Dimensions">
+            <p className="weight">Weight: <span className="weight-value">{story.weight}</span></p>
+            <p className="dimensions">Dimensions: Undefined</p>
+          </Section>
+          <Section title="Delivery Notes">
+            <p>Please ensure someone is available to receive the package. If you have specific delivery preferences or instructions, contact our customer service.</p>
+          </Section>
+          <Section title="Proof of Delivery">
+            <p>Upon delivery, the package will require a signature from the recipient. The proof of delivery with the recipient's name and signature will be available on our tracking portal.</p>
+          </Section>
+          <Section title="Exception Notifications">
+            <p>In case of any delivery issues or exceptions, you will receive timely notifications. For further assistance, please contact our customer service.</p>
+          </Section>
+          <Section title="Insurance Information">
+            <p>Your shipment fee is required on freight transit due to insurance. Conditions apply. For details, please refer to our insurance policy.</p>
+          </Section>
+          <Section title="Weather Conditions">
+            <p>Please note that weather conditions may impact delivery schedules. We monitor weather updates to minimize any disruptions.</p>
+          </Section>
+          <Section title="Contact Information">
+            <p>For assistance or inquiries, our customer support team can be reached at vishislogistics1968@gmail.com.</p>
+            <p>Thank you for choosing Vishis Logistics. We appreciate your trust and look forward to delivering your package with care and efficiency. For real-time updates and additional information, visit our tracking portal at www.vishislogistics.com/tracking.</p>
+          </Section>
+        </Row>
       </Container>
     </Styles>
   );
 };
 
-export default Story;
+const Section = ({ title, children }) => (
+  <div className="section">
+    <h2>{title}</h2>
+    {children}
+  </div>
+);
+
+export default TrackingStatement;
+
 const Styles = styled.div`
-  overflow-x: hidden;
   margin-top: 50px;
+  font-family: 'Arial', sans-serif;
+  
+  .tracking-container {
+    background-color: rgb(217, 219, 220);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .tracking-header {
+    margin-bottom: 20px;
+  }
+  
+  .tracking-id, .package-status {
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+
+  .tracking-id-value, .package-status-value, .transit-date, .expected-date, .weight-value {
+    font-size: 1.5rem;
+    font-weight: bolder;
+  }
+  
+  .tracking-details {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  .section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .section p {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .tracking-container {
+      padding: 10px;
+    }
+  }
 `;
