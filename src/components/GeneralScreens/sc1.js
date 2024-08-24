@@ -51,7 +51,7 @@ const Sc1 = () => {
       <Container>
         <Row className="hero-section">
           <Col md={5} className="text-section">
-            <h1 className="title">VISHIS..</h1>
+            {/* <h1 className="title">VISHIS..</h1> */}
             <p className="description">
               At Vishis, we understand that every journey is a story waiting to be told.
               We bring you cutting-edge tracking solutions to elevate your experience,
